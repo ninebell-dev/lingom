@@ -72,6 +72,27 @@
   .features b{color:var(--ink);font-weight:600}
   .features .dot{color:var(--line);margin:0 7px}
 
+  /* ---- how it works (개인 PC + Tailscale) ---- */
+  .divider{width:100%;height:1px;background:var(--line);margin:56px auto 0}
+  .sec-title{text-align:center;font-family:var(--display);font-weight:600;font-size:clamp(23px,4vw,31px);letter-spacing:-.01em;margin:48px 0 8px}
+  .sec-lead{text-align:center;color:var(--ink-soft);font-size:14.5px;line-height:1.85;max-width:600px;margin:0 auto 30px}
+  .sec-lead b{color:var(--ink);font-weight:600}
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .how .item{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:26px 20px;text-align:center}
+  .how .ic{font-size:30px;line-height:1;margin-bottom:12px}
+  .how h3{font-family:var(--display);font-weight:600;font-size:18px;margin:0 0 7px;letter-spacing:-.01em}
+  .how p{color:var(--ink-soft);font-size:13.5px;line-height:1.75;margin:0}
+  @media(max-width:720px){ .how{grid-template-columns:1fr;gap:12px} }
+
+  /* ---- contribute (GitHub issue) ---- */
+  .contribute{margin:52px auto 0;text-align:center;background:linear-gradient(180deg,var(--paper2),var(--card));border:1.5px solid var(--line);border-radius:22px;padding:40px 26px}
+  .contribute h2{font-family:var(--display);font-weight:600;font-size:clamp(22px,3.6vw,28px);margin:0 0 10px;letter-spacing:-.01em}
+  .contribute p{color:var(--ink-soft);font-size:14.5px;line-height:1.85;max-width:540px;margin:0 auto 24px}
+  .gh-btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:var(--ink);border-radius:999px;padding:13px 26px;transition:.18s;box-shadow:0 6px 16px rgba(43,37,33,.18)}
+  .gh-btn:hover{transform:translateY(-2px);background:var(--accent-deep);box-shadow:0 10px 22px rgba(154,58,34,.28)}
+  .gh-btn svg{width:19px;height:19px;fill:currentColor}
+  .gh-note{margin-top:15px;font-size:12.5px;color:var(--ink-faint)}
+
   footer{margin-top:auto;text-align:center;padding:44px 0 30px;color:var(--ink-faint);font-size:12.5px}
   footer .heart{color:var(--accent)}
   .bear-mini{width:18px;height:18px;vertical-align:-4px;margin-right:5px}
@@ -133,6 +154,38 @@
     <p class="features">
       <b>상황별 패턴</b><span class="dot">·</span><b>가리기 자가 테스트</b><span class="dot">·</span><b>간격 반복 복습</b><span class="dot">·</span><b>시험</b><span class="dot">·</span><b>쓰기 연습</b><span class="dot">·</span><b>섀도잉</b><span class="dot">·</span><b>진도 동기화</b>
     </p>
+
+    <div class="divider"></div>
+
+    <h2 class="sec-title">내 PC가 곧 나만의 학습 서버</h2>
+    <p class="sec-lead">링곰은 거창한 클라우드 서비스가 아니라, <b>내 개인 PC에서 직접 돌리는 작은 학습 서버</b>예요. <b>Tailscale</b>로 연결하면 폰이든 노트북이든, 집 밖 카페에서든 안전하게 내 서버에 접속해 같은 진도로 이어서 공부할 수 있어요.</p>
+    <div class="how">
+      <div class="item">
+        <div class="ic">🖥️</div>
+        <h3>내 PC가 서버</h3>
+        <p>도커 한 줄이면 내 컴퓨터가 학습 서버가 돼요. 월 구독도, 회원가입도 없어요.</p>
+      </div>
+      <div class="item">
+        <div class="ic">🔒</div>
+        <h3>Tailscale로 어디서나</h3>
+        <p>내 기기끼리만 이어지는 안전한 사설망. 밖에서도 내 서버에 그대로 접속해요.</p>
+      </div>
+      <div class="item">
+        <div class="ic">📈</div>
+        <h3>진도는 내 것</h3>
+        <p>외운 문장·복습 일정이 내 서버에만 저장되고, 기기 간 자동으로 동기화돼요.</p>
+      </div>
+    </div>
+
+    <div class="contribute">
+      <h2>함께 만들어가요 🐻</h2>
+      <p>원하는 언어, 더 넣었으면 하는 상황·표현, 불편한 점, 새 기능 아이디어 — 무엇이든 좋아요. 여러분의 의견이 다음 업데이트가 됩니다.</p>
+      <a class="gh-btn" href="https://github.com/ninebell-dev/lingom/issues" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub 이슈로 의견 남기기
+      </a>
+      <div class="gh-note">github.com/ninebell-dev/lingom/issues</div>
+    </div>
   </div>
 
   <footer>
