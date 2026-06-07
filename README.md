@@ -39,19 +39,56 @@ server.py           정적 서빙 + 진도 동기화 API (포트 30000)
 
 데이터(`*-data.js`)는 엔진과 분리돼 있어, 데이터만 바꿔 콘텐츠를 확장할 수 있습니다.
 
-## 실행
+## 🚀 시작하기 (개발 지식 필요 없음)
 
-순수 정적 사이트라 어떤 정적 서버로도 열립니다.
+아래 **방법 1(도커)** 만 따라 하면 됩니다. 명령어를 그대로 복사해서 붙여넣으세요.
+
+### 방법 1. 도커로 실행 — 가장 쉬움 ⭐
+
+> 컴퓨터에 **Docker Desktop** 한 번만 깔면, 파이썬 같은 걸 따로 설치할 필요가 없습니다.
+
+**1단계. Docker Desktop 설치**
+- 윈도우/맥: <https://www.docker.com/products/docker-desktop/> 에서 내려받아 설치하고 한 번 실행해 둡니다.
+
+**2단계. 이 프로젝트 내려받기**
+- GitHub 페이지 초록색 **`< > Code`** 버튼 → **Download ZIP** → 압축을 풉니다.
+  (또는 아는 분은 `git clone https://github.com/ninebell-dev/lingom.git`)
+
+**3단계. 폴더에서 터미널 열고 한 줄 실행**
+- 압축 푼 폴더 안에서 터미널(맥: 터미널, 윈도우: PowerShell)을 열고:
 
 ```bash
-# 진도 동기화까지 포함 (권장)
-python3 server.py        # http://localhost:30000
-
-# 또는 단순 정적 서빙
-python3 -m http.server 30000
+docker compose up -d
 ```
 
-진도는 `server.py`가 `~/.local/state/study-site/progress.json`에 저장하고, 기기 간 합집합으로 병합합니다.
+**4단계. 브라우저에서 접속**
+- 주소창에 **<http://localhost:30000>** 입력 → 끝! 🎉
+
+| 하고 싶은 것 | 명령어 |
+|---|---|
+| 끄기 | `docker compose down` |
+| 다시 켜기 | `docker compose up -d` |
+| 최신 코드로 새로 빌드 | `docker compose up -d --build` |
+
+학습 진도는 자동으로 저장돼서, 컨테이너를 껐다 켜거나 지워도 그대로 유지됩니다.
+접속 포트(30000)를 바꾸고 싶으면 `docker-compose.yml`의 `"30000:30000"`에서 앞 숫자만 바꾸세요 (예: `"8080:30000"` → http://localhost:8080).
+
+### 방법 2. 파이썬으로 실행 — 도커가 싫다면
+
+컴퓨터에 **Python 3** 이 있으면 설치할 게 전혀 없습니다. 폴더 안에서:
+
+```bash
+python3 server.py
+```
+
+→ 브라우저에서 <http://localhost:30000> 접속. (진도 동기화 포함)
+
+> 진도는 `~/.local/state/study-site/progress.json`에 저장되고, 여러 기기의 기록을 합집합으로 병합합니다.
+> 환경변수 `PORT`, `STUDY_DATA`, `STUDY_ROOT`로 포트·저장위치·서빙폴더를 바꿀 수 있습니다.
+
+### 방법 3. 그냥 둘러보기 — 진도 저장 없이
+
+`영어/index.html` 파일을 더블클릭해 브라우저로 바로 열어도 학습 화면은 동작합니다. (이 경우 기기 간 진도 동기화만 빠집니다.)
 
 ## ☕ 후원
 

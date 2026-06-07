@@ -15,9 +15,15 @@ import os
 import threading
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
-ROOT = "/home/ninebell/lifeos/공부자료"
-DATA_FILE = os.path.expanduser("~/.local/state/study-site/progress.json")
-PORT = 30000
+# 환경변수로 덮어쓸 수 있음(도커 등). 기본값은 기존 동작과 동일.
+#  - STUDY_ROOT : 정적 파일을 서빙할 폴더 (기본: 이 스크립트가 있는 폴더)
+#  - STUDY_DATA : 진도 저장 파일 경로 (기본: ~/.local/state/study-site/progress.json)
+#  - PORT       : 포트 번호 (기본: 30000)
+ROOT = os.environ.get("STUDY_ROOT", os.path.dirname(os.path.abspath(__file__)))
+DATA_FILE = os.environ.get(
+    "STUDY_DATA", os.path.expanduser("~/.local/state/study-site/progress.json")
+)
+PORT = int(os.environ.get("PORT", "30000"))
 
 _lock = threading.Lock()
 

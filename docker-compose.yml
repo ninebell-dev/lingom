@@ -1,0 +1,15 @@
+name: lingom
+
+services:
+  lingom:
+    build: .
+    image: lingom
+    container_name: lingom
+    ports:
+      - "30000:30000"        # 왼쪽 30000 을 바꾸면 접속 포트가 바뀜 (예: "8080:30000")
+    volumes:
+      - lingom-progress:/data # 학습 진도 영구 저장 (컨테이너를 지워도 유지)
+    restart: unless-stopped
+
+volumes:
+  lingom-progress:

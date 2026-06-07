@@ -1,0 +1,9 @@
+.git
+.gitignore
+수학/
+**/keep.docx
+**/.gstack/
+_t.html
+_preview.html
+_bear.html
+.DS_Store
