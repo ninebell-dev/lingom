@@ -1,0 +1,17 @@
+# 링곰과 무관한 자료
+수학/
+**/keep.docx
+
+# gstack 내부 상태
+**/.gstack/
+
+# 임시 렌더링/미리보기 파일
+_t.html
+_preview.html
+_bear.html
+
+# OS / 에디터
+.DS_Store
+Thumbs.db
+*.swp
+*~

@@ -1,0 +1,28 @@
+/* 문장별 단어·표현 풀이. 키 "상황id|그룹|예문". [["단어/구문","뜻·설명"], ...] */
+window.NOTES = {
+  "greetings|0|0": [["how's it going","'어떻게 지내?' — 가장 흔한 안부"],["Hey","친근한 인사 (Hi보다 가벼움)"]],
+  "greetings|0|1": [["How are you doing","잘 지내요? (How are you와 같은 뜻)"],["today","오늘"]],
+  "greetings|0|2": [["Good to see you","만나서 반가워요"],["How have you been","그동안 어떻게 지냈어요? (현재완료 = 한동안)"]],
+  "greetings|0|3": [["Pretty good","꽤 좋아요 (pretty = 꽤)"],["How about you?","당신은요?"]],
+  "greetings|0|4": [["Can't complain","불평할 것 없어요 → 그럭저럭 좋아요 (관용)"],["Same as always","늘 똑같아요"]],
+  "greetings|1|0": [["be up to","~하며 지내다"],["lately","요즘·최근"]],
+  "greetings|1|1": [["Not much","별거 없어요 (안부 답)"],["a lot","많이"]],
+  "greetings|1|2": [["I've been busy","바빴어요 (현재완료 = 계속)"],["with work","일로·일 때문에"]],
+  "greetings|1|3": [["the usual","늘 하던 것·평소대로"],["you know","뭐 알잖아 (말 채우는 표현)"]],
+  "greetings|1|4": [["started + -ing","~하기 시작했다"],["again","다시"]],
+  "greetings|2|0": [["It's been a while","오랜만이야 (시간이 좀 됐다)"]],
+  "greetings|2|1": [["Long time no see","오랜만이야 (정해진 관용구)"],["How are things?","어떻게 지내? (요즘 상황은)"]],
+  "greetings|2|2": [["It feels like forever","정말 오래된 것 같아"],["since we last met","마지막으로 만난 이후로"]],
+  "greetings|2|3": [["catch up","밀린 이야기·근황 나누다"],["sometime","언제 한번"]],
+  "greetings|2|4": [["leave it so long","이렇게 오래 (안 보고) 두다"],["next time","다음엔"]],
+  "greetings|3|0": [["isn't it?","그렇죠? (부가의문 — 동의 구하기)"],["we're having","(요즘) ~한 (날씨)"]],
+  "greetings|3|1": [["freezing","엄청 추운 (= very cold)"],["isn't it?","그렇죠?"]],
+  "greetings|3|2": [["Looks like","~할 것 같다 (보아하니)"],["going to","~할 것이다 (가까운 미래)"]],
+  "greetings|3|3": [["clear up","(날씨가) 개다"],["by the weekend","주말까지는"]],
+  "greetings|3|4": [["Can you believe ~?","~ 진짜 말도 안 되죠? (놀람)"],["this heat","이 더위"]],
+  "greetings|4|0": [["take care","잘 지내·몸조심 (작별 인사)"]],
+  "greetings|4|1": [["See you around","또 봐요 (언젠가 보자)"]],
+  "greetings|4|2": [["Have a good one","좋은 하루 보내요 (캐주얼)"]],
+  "greetings|4|3": [["Catch you later","나중에 봐 (See you later의 캐주얼)"]],
+  "greetings|4|4": [["It was great seeing you","만나서 정말 좋았어요"],["seeing","만남 (동명사)"]]
+};

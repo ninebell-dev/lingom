@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>링곰 · Lingom — 곰이랑 매일 한 마디</title>
+<link rel="icon" type="image/svg+xml" href="bear.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#F4ECDD; --paper2:#FBF6EC; --card:#FCF8F0;
+    --ink:#2B2521; --ink-soft:#7A6C5B; --ink-faint:#A89A86;
+    --accent:#BF4E32; --accent-deep:#9A3A22; --teal:#3C7361; --gold:#C99A4A;
+    --line:#E4D6C0; --line-soft:#EDE2CE;
+    --kr:'Pretendard',system-ui,sans-serif; --en:'Newsreader',Georgia,serif; --display:'Fraunces',Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:var(--kr); color:var(--ink); background:var(--paper);
+    background-image:radial-gradient(1200px 500px at 50% -8%, var(--paper2), transparent 70%);
+    min-height:100vh; -webkit-font-smoothing:antialiased; display:flex; flex-direction:column;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  .wrap{max-width:980px;margin:0 auto;padding:0 22px;width:100%}
+
+  /* ---- hero ---- */
+  header.hero{text-align:center;padding:64px 0 14px;animation:rise .6s cubic-bezier(.2,.7,.3,1) both}
+  .brand{display:inline-flex;align-items:center;gap:12px}
+  .bear{width:clamp(56px,11vw,78px);height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(74,54,33,.14))}
+  .wordmark{font-family:var(--display);font-weight:600;font-size:clamp(46px,10vw,82px);line-height:1;letter-spacing:-.02em}
+  .wordmark em{font-style:italic;color:var(--accent)}
+  .latin{margin-top:12px;font-family:var(--display);font-style:italic;letter-spacing:.42em;text-transform:uppercase;font-size:13px;color:var(--gold)}
+  .tagline{margin-top:20px;font-family:var(--en);font-style:italic;font-size:clamp(17px,3vw,22px);color:var(--ink-soft)}
+  .sub{margin-top:8px;font-size:14.5px;color:var(--ink-faint)}
+  .rule{width:60px;height:2px;background:var(--accent);margin:26px auto 0;position:relative}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:6px;height:6px;border-radius:50%;background:var(--accent);transform:translateY(-50%)}
+  .rule::before{left:-15px}.rule::after{right:-15px}
+
+  /* ---- language cards ---- */
+  .pick-label{text-align:center;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);margin:40px 0 16px}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .card{
+    position:relative;display:flex;flex-direction:column;gap:4px;text-decoration:none;color:inherit;
+    background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:26px 22px 22px;
+    transition:.2s; animation:rise .6s cubic-bezier(.2,.7,.3,1) both;
+  }
+  .card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}
+  .card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 16px 34px rgba(74,54,33,.10)}
+  .flag{font-size:34px;line-height:1;margin-bottom:8px}
+  .card h2{font-family:var(--display);font-weight:600;font-size:25px;margin:0;letter-spacing:-.01em}
+  .card .native{font-family:var(--en);font-style:italic;font-size:14px;color:var(--ink-soft);margin-top:1px}
+  .stats{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .stats span{font-size:11.5px;font-weight:600;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px 9px;font-variant-numeric:tabular-nums}
+  .go{margin-top:18px;display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;color:var(--accent)}
+  .card:hover .go{gap:9px}
+  @media(max-width:720px){
+    .cards{grid-template-columns:1fr;gap:12px}
+    .card{flex-direction:row;align-items:center;flex-wrap:wrap;padding:18px 18px}
+    .card .flag{margin:0 14px 0 0;font-size:30px}
+    .card h2{font-size:22px}
+    .card .native{flex-basis:100%;order:5;margin-top:2px}
+    .stats{flex-basis:100%;order:6;margin-top:12px}
+    .go{order:7;margin:12px 0 0 auto}
+  }
+
+  /* ---- features ---- */
+  .features{margin:42px auto 0;max-width:760px;text-align:center;font-size:13px;color:var(--ink-soft);line-height:1.9}
+  .features b{color:var(--ink);font-weight:600}
+  .features .dot{color:var(--line);margin:0 7px}
+
+  footer{margin-top:auto;text-align:center;padding:44px 0 30px;color:var(--ink-faint);font-size:12.5px}
+  footer .heart{color:var(--accent)}
+  .bear-mini{width:18px;height:18px;vertical-align:-4px;margin-right:5px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="brand">
+        <svg class="bear" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="링곰 마스코트">
+          <circle cx="27" cy="27" r="14" fill="#C58A5A"/>
+          <circle cx="73" cy="27" r="14" fill="#C58A5A"/>
+          <circle cx="27" cy="28" r="7.5" fill="#D98B6A"/>
+          <circle cx="73" cy="28" r="7.5" fill="#D98B6A"/>
+          <circle cx="50" cy="55" r="33" fill="#C58A5A"/>
+          <circle cx="30" cy="62" r="6.5" fill="#BF4E32" opacity=".22"/>
+          <circle cx="70" cy="62" r="6.5" fill="#BF4E32" opacity=".22"/>
+          <ellipse cx="50" cy="64" rx="17" ry="13" fill="#F6E8D2"/>
+          <circle cx="38" cy="50" r="4" fill="#2B2521"/>
+          <circle cx="62" cy="50" r="4" fill="#2B2521"/>
+          <circle cx="39.3" cy="48.7" r="1.2" fill="#fff"/>
+          <circle cx="63.3" cy="48.7" r="1.2" fill="#fff"/>
+          <ellipse cx="50" cy="59" rx="5.5" ry="4" fill="#3A2E26"/>
+          <path d="M50 63 v3.5 M50 66.5 q-5 4.5 -9 1 M50 66.5 q5 4.5 9 1" fill="none" stroke="#3A2E26" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="wordmark">링<em>곰</em></span>
+      </div>
+      <div class="latin">Lingom</div>
+      <div class="tagline">곰이랑 매일 한 마디</div>
+      <div class="sub">상황별 실생활 회화 패턴을 하루 하나씩, 입에 붙을 때까지.</div>
+      <div class="rule"></div>
+    </header>
+
+    <p class="pick-label">언어를 골라 시작하세요</p>
+    <div class="cards">
+      <a class="card" href="영어/index.html">
+        <span class="flag">🇺🇸</span>
+        <h2>영어</h2>
+        <div class="native">Real-Life English Patterns</div>
+        <div class="stats"><span>15 상황</span><span>60 패턴</span><span>300 문장</span></div>
+        <span class="go">시작하기 →</span>
+      </a>
+      <a class="card" href="스페인어/index.html">
+        <span class="flag">🇪🇸</span>
+        <h2>스페인어</h2>
+        <div class="native">Patrones de Español</div>
+        <div class="stats"><span>24 상황</span><span>88 패턴</span><span>439 문장</span></div>
+        <span class="go">시작하기 →</span>
+      </a>
+      <a class="card" href="일본어/index.html">
+        <span class="flag">🇯🇵</span>
+        <h2>일본어</h2>
+        <div class="native">日本語フレーズ</div>
+        <div class="stats"><span>24 상황</span><span>99 패턴</span><span>491 문장</span></div>
+        <span class="go">시작하기 →</span>
+      </a>
+    </div>
+
+    <p class="features">
+      <b>상황별 패턴</b><span class="dot">·</span><b>가리기 자가 테스트</b><span class="dot">·</span><b>간격 반복 복습</b><span class="dot">·</span><b>시험</b><span class="dot">·</span><b>쓰기 연습</b><span class="dot">·</span><b>섀도잉</b><span class="dot">·</span><b>진도 동기화</b>
+    </p>
+  </div>
+
+  <footer>
+    <svg class="bear-mini" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="27" cy="27" r="14" fill="#C58A5A"/><circle cx="73" cy="27" r="14" fill="#C58A5A"/>
+      <circle cx="27" cy="28" r="7.5" fill="#D98B6A"/><circle cx="73" cy="28" r="7.5" fill="#D98B6A"/>
+      <circle cx="50" cy="55" r="33" fill="#C58A5A"/>
+      <circle cx="30" cy="62" r="6.5" fill="#BF4E32" opacity=".22"/><circle cx="70" cy="62" r="6.5" fill="#BF4E32" opacity=".22"/>
+      <ellipse cx="50" cy="64" rx="17" ry="13" fill="#F6E8D2"/>
+      <circle cx="38" cy="50" r="4" fill="#2B2521"/><circle cx="62" cy="50" r="4" fill="#2B2521"/>
+      <circle cx="39.3" cy="48.7" r="1.2" fill="#fff"/><circle cx="63.3" cy="48.7" r="1.2" fill="#fff"/>
+      <ellipse cx="50" cy="59" rx="5.5" ry="4" fill="#3A2E26"/>
+      <path d="M50 63 v3.5 M50 66.5 q-5 4.5 -9 1 M50 66.5 q5 4.5 9 1" fill="none" stroke="#3A2E26" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    링곰 · Lingom — 곰이랑 매일 한 마디 <span class="heart">♥</span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,28 @@
+/* 문장별 단어·표현 풀이. 키 "상황id|그룹|예문". [["단어/구문","뜻·설명"], ...] */
+window.NOTES = {
+  "saludos|0|0": [["¿Qué tal?","어떻게 지내? (만능 안부)"],["Hola","안녕"]],
+  "saludos|0|1": [["¿Cómo estás?","어떻게 지내? (estar = 상태)"],["hoy","오늘"]],
+  "saludos|0|2": [["Muy bien","아주 좋아"],["¿Y tú?","너는?"]],
+  "saludos|0|3": [["todo tranquilo","다 평온해·잘 지내"],["aquí","여기 (그냥 잘 지내 뉘앙스)"]],
+  "saludos|0|4": [["Más o menos","그럭저럭 (직역: 더 또는 덜)"]],
+  "saludos|1|0": [["Buenos días","좋은 아침 (오전 인사)"],["¿cómo amaneció?","잘 주무셨어요? (amanecer = 날이 밝다)"]],
+  "saludos|1|1": [["Buenas tardes","좋은 오후 (점심~해질녘)"],["a todos","모두에게"]],
+  "saludos|1|2": [["Buenas noches","좋은 밤 (저녁 인사·작별)"],["que descanses","푹 쉬어 (접속법 기원)"]],
+  "saludos|1|3": [["¡Buenas!","안녕! (Buenas tardes/noches 줄임)"],["¿Qué cuentas?","뭐 새로운 거 있어? (contar = 이야기하다)"]],
+  "saludos|1|4": [["Igualmente","당신도요·마찬가지로"]],
+  "saludos|2|0": [["¡Cuánto tiempo!","정말 오랜만! (직역: 시간이 얼마나)"],["sin verte","너를 못 본 채"]],
+  "saludos|2|1": [["¡Qué alegría!","너무 반갑다! (정말 기뻐)"],["verte","너를 보다"]],
+  "saludos|2|2": [["¿Cómo te ha ido?","그동안 어떻게 지냈어? (현재완료)"]],
+  "saludos|2|3": [["Tenemos que","우리 ~해야 해 (의무)"],["pronto","곧"]],
+  "saludos|2|4": [["A ver si","언제 ~하자 (~하면 좋겠다)"],["quedar","(만나기로) 약속하다"]],
+  "saludos|3|0": [["¡Qué calor!","진짜 덥다!"],["hace calor","덥다 (hace = 날씨가 ~하다)"]],
+  "saludos|3|1": [["Hace frío","춥다"],["¿verdad?","그치? (동의 구하기)"]],
+  "saludos|3|2": [["Parece que","~인 것 같다"],["va a llover","비가 올 것이다 (ir a = 가까운 미래)"]],
+  "saludos|3|3": [["Hace un día precioso","날씨가 정말 좋다 (precioso = 아주 멋진)"]],
+  "saludos|3|4": [["Espero que","~하길 바라 (+ 접속법)"],["mejore","좋아지다 (mejorar 접속법)"],["el tiempo","날씨"]],
+  "saludos|4|0": [["Hasta luego","이따 봐 (luego = 나중에)"]],
+  "saludos|4|1": [["Nos vemos","또 봐 (서로 보자)"],["pronto","곧"]],
+  "saludos|4|2": [["Cuídate","몸조심해 (cuidarse 재귀동사)"]],
+  "saludos|4|3": [["Que tengas un buen día","좋은 하루 보내 (접속법 기원)"]],
+  "saludos|4|4": [["Me alegro de","~해서 기뻐"],["verte","너를 보다"]]
+};
