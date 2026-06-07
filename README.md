@@ -52,3 +52,11 @@ python3 -m http.server 30000
 ```
 
 진도는 `server.py`가 `~/.local/state/study-site/progress.json`에 저장하고, 기기 간 합집합으로 병합합니다.
+
+## ☕ 후원
+
+링곰이 도움이 됐다면 곰에게 따뜻한 차 한 잔 사주세요. 후원은 콘텐츠 확장과 유지보수에 큰 힘이 됩니다.
+
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-후원하기-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/ninebelldevgmailcom)
+
+👉 **https://ko-fi.com/ninebelldevgmailcom**
