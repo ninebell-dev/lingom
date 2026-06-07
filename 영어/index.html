@@ -666,6 +666,7 @@
   <h1>영어 회화 <em>수첩</em></h1>
   <div class="sub">Real-Life English Patterns, by Situation</div>
   <div class="rule"></div>
+  <div style="margin-top:14px;font-size:12.5px"><a href="#" data-logout style="color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line)">↩ 로그아웃</a></div>
   <div class="lang-switch"><a href="../스페인어/index.html">🇪🇸 스페인어</a> <a href="../일본어/index.html">🇯🇵 일본어</a></div>
 </header>
 
@@ -874,6 +875,19 @@
 <script src="patterns-data.js"></script>
 <script>
 (function(){
+  // ---------- 로그인 가드 (비로그인 시 로그인 화면으로) ----------
+  try{
+    var _me = new XMLHttpRequest();
+    _me.open('GET','/api/me',false);
+    _me.send(null);
+    if(_me.status === 401){ location.replace('../index.html'); return; }
+  }catch(e){}
+  document.addEventListener('click', function(e){
+    var t = e.target.closest ? e.target.closest('[data-logout]') : null;
+    if(!t) return;
+    e.preventDefault();
+    fetch('/api/logout',{method:'POST',credentials:'same-origin'}).catch(function(){}).then(function(){ location.replace('../index.html'); });
+  });
   const DATA = window.PATTERN_DATA || [];
   const DIA = window.DIALOGS || {};
   const NOTES = window.NOTES || {};
