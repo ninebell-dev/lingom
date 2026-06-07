@@ -24,31 +24,64 @@
     min-height:100vh; -webkit-font-smoothing:antialiased; display:flex; flex-direction:column;
   }
   @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-
   .wrap{max-width:980px;margin:0 auto;padding:0 22px;width:100%}
-
-  /* ---- hero ---- */
-  header.hero{text-align:center;padding:64px 0 14px;animation:rise .6s cubic-bezier(.2,.7,.3,1) both}
+  .view[hidden]{display:none}
+  .bear{width:clamp(56px,11vw,76px);height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(74,54,33,.14))}
   .brand{display:inline-flex;align-items:center;gap:12px}
-  .bear{width:clamp(56px,11vw,78px);height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(74,54,33,.14))}
-  .wordmark{font-family:var(--display);font-weight:600;font-size:clamp(46px,10vw,82px);line-height:1;letter-spacing:-.02em}
+  .wordmark{font-family:var(--display);font-weight:600;font-size:clamp(40px,9vw,72px);line-height:1;letter-spacing:-.02em}
   .wordmark em{font-style:italic;color:var(--accent)}
-  .latin{margin-top:12px;font-family:var(--display);font-style:italic;letter-spacing:.42em;text-transform:uppercase;font-size:13px;color:var(--gold)}
-  .tagline{margin-top:20px;font-family:var(--en);font-style:italic;font-size:clamp(17px,3vw,22px);color:var(--ink-soft)}
-  .sub{margin-top:8px;font-size:14.5px;color:var(--ink-faint)}
+  .latin{margin-top:10px;font-family:var(--display);font-style:italic;letter-spacing:.42em;text-transform:uppercase;font-size:12.5px;color:var(--gold)}
+
+  /* ---------- LOGIN ---------- */
+  #login{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 22px;animation:rise .5s ease both}
+  #login .brand{margin-bottom:6px}
+  #login .tagline{font-family:var(--en);font-style:italic;color:var(--ink-soft);font-size:16px;margin:14px 0 28px}
+  .authcard{width:100%;max-width:380px;background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:30px 26px;box-shadow:0 14px 34px rgba(74,54,33,.08)}
+  .tabs{display:flex;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:22px}
+  .tabs button{flex:1;border:none;background:none;font-family:var(--kr);font-weight:600;font-size:14px;color:var(--ink-soft);padding:9px;border-radius:999px;cursor:pointer;transition:.15s}
+  .tabs button.on{background:var(--accent);color:#fff;box-shadow:0 3px 8px rgba(191,78,50,.25)}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:6px}
+  .field input{width:100%;font-family:var(--kr);font-size:15px;color:var(--ink);background:var(--paper2);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;outline:none;transition:.15s}
+  .field input:focus{border-color:var(--accent);background:#fff}
+  .submit{width:100%;font-family:var(--kr);font-weight:700;font-size:15.5px;color:#fff;background:var(--accent);border:none;border-radius:12px;padding:14px;cursor:pointer;transition:.15s;margin-top:4px}
+  .submit:hover{background:var(--accent-deep)}
+  .submit:disabled{opacity:.6;cursor:default}
+  .hint{font-size:12px;color:var(--ink-faint);margin-top:12px;text-align:center}
+  .err{font-size:13px;color:var(--accent-deep);background:rgba(191,78,50,.08);border:1px solid rgba(191,78,50,.25);border-radius:10px;padding:9px 12px;margin-bottom:14px}
+  .err[hidden]{display:none}
+
+  /* ---------- WELCOME (일회성) ---------- */
+  #welcome{animation:rise .5s ease both}
+  header.hero{text-align:center;padding:60px 0 14px}
+  .hero .tagline{margin-top:20px;font-family:var(--en);font-style:italic;font-size:clamp(17px,3vw,22px);color:var(--ink-soft)}
+  .hero .sub{margin-top:8px;font-size:14.5px;color:var(--ink-faint)}
   .rule{width:60px;height:2px;background:var(--accent);margin:26px auto 0;position:relative}
   .rule::before,.rule::after{content:"";position:absolute;top:50%;width:6px;height:6px;border-radius:50%;background:var(--accent);transform:translateY(-50%)}
   .rule::before{left:-15px}.rule::after{right:-15px}
+  .hero .brand{justify-content:center}
+  .feature-line{margin:34px auto 0;max-width:760px;text-align:center;font-size:13px;color:var(--ink-soft);line-height:1.9}
+  .feature-line b{color:var(--ink);font-weight:600}
+  .feature-line .dot{color:var(--line);margin:0 7px}
+  .start-wrap{text-align:center;margin:40px 0 10px}
+  .start-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--kr);font-weight:700;font-size:16px;color:#fff;background:var(--accent);border:none;border-radius:999px;padding:15px 34px;cursor:pointer;transition:.18s;box-shadow:0 8px 20px rgba(191,78,50,.25)}
+  .start-btn:hover{transform:translateY(-2px);background:var(--accent-deep)}
+  .gh-line{text-align:center;font-size:12.5px;color:var(--ink-faint);margin-top:26px}
+  .gh-line a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line)}
+  .gh-line a:hover{color:var(--accent)}
 
-  /* ---- language cards ---- */
-  .pick-label{text-align:center;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);margin:40px 0 16px}
+  /* ---------- PICKER (앱 홈) ---------- */
+  #picker{animation:rise .45s ease both}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:20px 0 8px;border-bottom:1px solid var(--line-soft);margin-bottom:6px}
+  .topbar .mini{display:inline-flex;align-items:center;gap:9px;font-family:var(--display);font-weight:600;font-size:19px}
+  .topbar .mini img{width:30px;height:30px}
+  .topbar .mini em{font-style:italic;color:var(--accent)}
+  .topbar .who{display:flex;align-items:center;gap:12px;font-size:12.5px;color:var(--ink-faint)}
+  .logout{font-family:var(--kr);font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:.15s}
+  .logout:hover{border-color:var(--accent);color:var(--accent)}
+  .pick-label{text-align:center;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);margin:34px 0 16px}
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .card{
-    position:relative;display:flex;flex-direction:column;gap:4px;text-decoration:none;color:inherit;
-    background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:26px 22px 22px;
-    transition:.2s; animation:rise .6s cubic-bezier(.2,.7,.3,1) both;
-  }
-  .card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}
+  .card{position:relative;display:flex;flex-direction:column;gap:4px;text-decoration:none;color:inherit;background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:26px 22px 22px;transition:.2s}
   .card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 16px 34px rgba(74,54,33,.10)}
   .flag{font-size:34px;line-height:1;margin-bottom:8px}
   .card h2{font-family:var(--display);font-weight:600;font-size:25px;margin:0;letter-spacing:-.01em}
@@ -67,146 +100,178 @@
     .go{order:7;margin:12px 0 0 auto}
   }
 
-  /* ---- features ---- */
-  .features{margin:42px auto 0;max-width:760px;text-align:center;font-size:13px;color:var(--ink-soft);line-height:1.9}
-  .features b{color:var(--ink);font-weight:600}
-  .features .dot{color:var(--line);margin:0 7px}
-
-  /* ---- how it works (개인 PC + Tailscale) ---- */
-  .divider{width:100%;height:1px;background:var(--line);margin:56px auto 0}
-  .sec-title{text-align:center;font-family:var(--display);font-weight:600;font-size:clamp(23px,4vw,31px);letter-spacing:-.01em;margin:48px 0 8px}
-  .sec-lead{text-align:center;color:var(--ink-soft);font-size:14.5px;line-height:1.85;max-width:600px;margin:0 auto 30px}
-  .sec-lead b{color:var(--ink);font-weight:600}
-  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .how .item{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:26px 20px;text-align:center}
-  .how .ic{font-size:30px;line-height:1;margin-bottom:12px}
-  .how h3{font-family:var(--display);font-weight:600;font-size:18px;margin:0 0 7px;letter-spacing:-.01em}
-  .how p{color:var(--ink-soft);font-size:13.5px;line-height:1.75;margin:0}
-  @media(max-width:720px){ .how{grid-template-columns:1fr;gap:12px} }
-
-  /* ---- contribute (GitHub issue) ---- */
-  .contribute{margin:52px auto 0;text-align:center;background:linear-gradient(180deg,var(--paper2),var(--card));border:1.5px solid var(--line);border-radius:22px;padding:40px 26px}
-  .contribute h2{font-family:var(--display);font-weight:600;font-size:clamp(22px,3.6vw,28px);margin:0 0 10px;letter-spacing:-.01em}
-  .contribute p{color:var(--ink-soft);font-size:14.5px;line-height:1.85;max-width:540px;margin:0 auto 24px}
-  .gh-btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:var(--ink);border-radius:999px;padding:13px 26px;transition:.18s;box-shadow:0 6px 16px rgba(43,37,33,.18)}
-  .gh-btn:hover{transform:translateY(-2px);background:var(--accent-deep);box-shadow:0 10px 22px rgba(154,58,34,.28)}
-  .gh-btn svg{width:19px;height:19px;fill:currentColor}
-  .gh-note{margin-top:15px;font-size:12.5px;color:var(--ink-faint)}
-
-  footer{margin-top:auto;text-align:center;padding:44px 0 30px;color:var(--ink-faint);font-size:12.5px}
+  footer{margin-top:auto;text-align:center;padding:40px 0 28px;color:var(--ink-faint);font-size:12.5px}
   footer .heart{color:var(--accent)}
-  .bear-mini{width:18px;height:18px;vertical-align:-4px;margin-right:5px}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="hero">
-      <div class="brand">
-        <svg class="bear" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="링곰 마스코트">
-          <rect x="3" y="3" width="94" height="94" rx="24" fill="#FBF6EC" stroke="#E4D6C0" stroke-width="1.5"/>
-          <g transform="translate(50 51.5) scale(.86) translate(-50 -51.5)">
-            <g stroke="#7A4F2E" stroke-width="2.4">
-              <circle cx="28" cy="29" r="13" fill="#C58A5A"/>
-              <circle cx="72" cy="29" r="13" fill="#C58A5A"/>
-              <circle cx="50" cy="55" r="32" fill="#C58A5A"/>
-            </g>
-            <circle cx="28" cy="30" r="6.5" fill="#D98B6A"/>
-            <circle cx="72" cy="30" r="6.5" fill="#D98B6A"/>
-            <circle cx="32" cy="62" r="6" fill="#BF4E32" opacity=".2"/>
-            <circle cx="68" cy="62" r="6" fill="#BF4E32" opacity=".2"/>
-            <ellipse cx="50" cy="63" rx="15.5" ry="12" fill="#F6E8D2" stroke="#7A4F2E" stroke-width="2.4"/>
-            <circle cx="39" cy="51" r="3.7" fill="#2B2521"/>
-            <circle cx="61" cy="51" r="3.7" fill="#2B2521"/>
-            <circle cx="40.2" cy="49.8" r="1.1" fill="#fff"/>
-            <circle cx="62.2" cy="49.8" r="1.1" fill="#fff"/>
-            <ellipse cx="50" cy="58.5" rx="5" ry="3.6" fill="#3A2E26"/>
-            <path d="M50 62.1 v3 M50 65.1 q-4.2 3.4 -7.6 .9 M50 65.1 q4.2 3.4 7.6 .9" fill="none" stroke="#3A2E26" stroke-width="2" stroke-linecap="round"/>
-          </g>
-        </svg>
-        <span class="wordmark">링<em>곰</em></span>
-      </div>
-      <div class="latin">Lingom</div>
-      <div class="tagline">곰이랑 매일 한 마디</div>
-      <div class="sub">상황별 실생활 회화 패턴을 하루 하나씩, 입에 붙을 때까지.</div>
-      <div class="rule"></div>
-    </header>
 
-    <p class="pick-label">언어를 골라 시작하세요</p>
-    <div class="cards">
-      <a class="card" href="영어/index.html">
-        <span class="flag">🇺🇸</span>
-        <h2>영어</h2>
-        <div class="native">Real-Life English Patterns</div>
-        <div class="stats"><span>15 상황</span><span>60 패턴</span><span>300 문장</span></div>
-        <span class="go">시작하기 →</span>
-      </a>
-      <a class="card" href="스페인어/index.html">
-        <span class="flag">🇪🇸</span>
-        <h2>스페인어</h2>
-        <div class="native">Patrones de Español</div>
-        <div class="stats"><span>24 상황</span><span>88 패턴</span><span>439 문장</span></div>
-        <span class="go">시작하기 →</span>
-      </a>
-      <a class="card" href="일본어/index.html">
-        <span class="flag">🇯🇵</span>
-        <h2>일본어</h2>
-        <div class="native">日本語フレーズ</div>
-        <div class="stats"><span>24 상황</span><span>99 패턴</span><span>491 문장</span></div>
-        <span class="go">시작하기 →</span>
-      </a>
+  <!-- ===== 로그인 / 회원가입 ===== -->
+  <section id="login" class="view">
+    <div class="brand">
+      <img class="bear" src="bear.svg" alt="링곰" />
+      <span class="wordmark">링<em>곰</em></span>
     </div>
+    <div class="tagline">곰이랑 매일 한 마디</div>
 
-    <p class="features">
-      <b>상황별 패턴</b><span class="dot">·</span><b>가리기 자가 테스트</b><span class="dot">·</span><b>간격 반복 복습</b><span class="dot">·</span><b>시험</b><span class="dot">·</span><b>쓰기 연습</b><span class="dot">·</span><b>섀도잉</b><span class="dot">·</span><b>진도 동기화</b>
-    </p>
-
-    <div class="divider"></div>
-
-    <h2 class="sec-title">내 PC가 곧 나만의 학습 서버</h2>
-    <p class="sec-lead">링곰은 거창한 클라우드 서비스가 아니라, <b>내 개인 PC에서 직접 돌리는 작은 학습 서버</b>예요. <b>Tailscale</b>로 연결하면 폰이든 노트북이든, 집 밖 카페에서든 안전하게 내 서버에 접속해 같은 진도로 이어서 공부할 수 있어요.</p>
-    <div class="how">
-      <div class="item">
-        <div class="ic">🖥️</div>
-        <h3>내 PC가 서버</h3>
-        <p>도커 한 줄이면 내 컴퓨터가 학습 서버가 돼요. 월 구독도, 회원가입도 없어요.</p>
+    <div class="authcard">
+      <div class="tabs">
+        <button id="tabLogin" class="on" type="button">로그인</button>
+        <button id="tabSignup" type="button">회원가입</button>
       </div>
-      <div class="item">
-        <div class="ic">🔒</div>
-        <h3>Tailscale로 어디서나</h3>
-        <p>내 기기끼리만 이어지는 안전한 사설망. 밖에서도 내 서버에 그대로 접속해요.</p>
+      <form id="authForm" autocomplete="on">
+        <div class="err" id="authErr" hidden></div>
+        <div class="field">
+          <label for="email">이메일</label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required />
+        </div>
+        <div class="field">
+          <label for="password">비밀번호</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="8자 이상" required minlength="8" />
+        </div>
+        <button class="submit" id="authSubmit" type="submit">로그인</button>
+        <div class="hint" id="authHint">처음이신가요? 위에서 ‘회원가입’을 눌러 계정을 만드세요.</div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== 환영 (첫 로그인 1회) ===== -->
+  <section id="welcome" class="view" hidden>
+    <div class="wrap">
+      <header class="hero">
+        <div class="brand">
+          <img class="bear" src="bear.svg" alt="링곰" />
+          <span class="wordmark">링<em>곰</em></span>
+        </div>
+        <div class="latin">Lingom</div>
+        <div class="tagline">곰이랑 매일 한 마디</div>
+        <div class="sub">상황별 실생활 회화 패턴을 하루 하나씩, 입에 붙을 때까지.</div>
+        <div class="rule"></div>
+      </header>
+
+      <p class="feature-line">
+        <b>상황별 패턴</b><span class="dot">·</span><b>가리기 자가 테스트</b><span class="dot">·</span><b>간격 반복 복습</b><span class="dot">·</span><b>시험</b><span class="dot">·</span><b>쓰기 연습</b><span class="dot">·</span><b>섀도잉</b><span class="dot">·</span><b>클라우드 동기화</b>
+      </p>
+
+      <div class="start-wrap">
+        <button class="start-btn" id="startBtn" type="button">시작하기 →</button>
       </div>
-      <div class="item">
-        <div class="ic">📈</div>
-        <h3>진도는 내 것</h3>
-        <p>외운 문장·복습 일정이 내 서버에만 저장되고, 기기 간 자동으로 동기화돼요.</p>
+      <p class="gh-line">의견·아이디어는 언제든 → <a href="https://github.com/ninebell-dev/lingom/issues" target="_blank" rel="noopener">GitHub 이슈</a></p>
+    </div>
+  </section>
+
+  <!-- ===== 언어 선택 (앱 홈) ===== -->
+  <section id="picker" class="view" hidden>
+    <div class="wrap">
+      <div class="topbar">
+        <span class="mini"><img src="bear.svg" alt="" />링<em>곰</em></span>
+        <span class="who"><span id="who"></span><button class="logout" id="logoutBtn" type="button">로그아웃</button></span>
+      </div>
+
+      <p class="pick-label">언어를 골라 시작하세요</p>
+      <div class="cards">
+        <a class="card" href="영어/index.html">
+          <span class="flag">🇺🇸</span>
+          <h2>영어</h2>
+          <div class="native">Real-Life English Patterns</div>
+          <div class="stats"><span>15 상황</span><span>60 패턴</span><span>300 문장</span></div>
+          <span class="go">시작하기 →</span>
+        </a>
+        <a class="card" href="스페인어/index.html">
+          <span class="flag">🇪🇸</span>
+          <h2>스페인어</h2>
+          <div class="native">Patrones de Español</div>
+          <div class="stats"><span>24 상황</span><span>88 패턴</span><span>439 문장</span></div>
+          <span class="go">시작하기 →</span>
+        </a>
+        <a class="card" href="일본어/index.html">
+          <span class="flag">🇯🇵</span>
+          <h2>일본어</h2>
+          <div class="native">日本語フレーズ</div>
+          <div class="stats"><span>24 상황</span><span>99 패턴</span><span>491 문장</span></div>
+          <span class="go">시작하기 →</span>
+        </a>
       </div>
     </div>
+  </section>
 
-    <div class="contribute">
-      <h2>함께 만들어가요 🐻</h2>
-      <p>원하는 언어, 더 넣었으면 하는 상황·표현, 불편한 점, 새 기능 아이디어 — 무엇이든 좋아요. 여러분의 의견이 다음 업데이트가 됩니다.</p>
-      <a class="gh-btn" href="https://github.com/ninebell-dev/lingom/issues" target="_blank" rel="noopener">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-        GitHub 이슈로 의견 남기기
-      </a>
-      <div class="gh-note">github.com/ninebell-dev/lingom/issues</div>
-    </div>
-  </div>
+  <footer>🐻 링곰 · Lingom — 곰이랑 매일 한 마디 <span class="heart">♥</span></footer>
 
-  <footer>
-    <svg class="bear-mini" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="3" y="3" width="94" height="94" rx="24" fill="#FBF6EC" stroke="#E4D6C0" stroke-width="1.5"/>
-      <g transform="translate(50 51.5) scale(.86) translate(-50 -51.5)">
-        <g stroke="#7A4F2E" stroke-width="2.4"><circle cx="28" cy="29" r="13" fill="#C58A5A"/><circle cx="72" cy="29" r="13" fill="#C58A5A"/><circle cx="50" cy="55" r="32" fill="#C58A5A"/></g>
-        <circle cx="28" cy="30" r="6.5" fill="#D98B6A"/><circle cx="72" cy="30" r="6.5" fill="#D98B6A"/>
-        <ellipse cx="50" cy="63" rx="15.5" ry="12" fill="#F6E8D2" stroke="#7A4F2E" stroke-width="2.4"/>
-        <circle cx="39" cy="51" r="3.7" fill="#2B2521"/><circle cx="61" cy="51" r="3.7" fill="#2B2521"/>
-        <circle cx="40.2" cy="49.8" r="1.1" fill="#fff"/><circle cx="62.2" cy="49.8" r="1.1" fill="#fff"/>
-        <ellipse cx="50" cy="58.5" rx="5" ry="3.6" fill="#3A2E26"/>
-        <path d="M50 62.1 v3 M50 65.1 q-4.2 3.4 -7.6 .9 M50 65.1 q4.2 3.4 7.6 .9" fill="none" stroke="#3A2E26" stroke-width="2" stroke-linecap="round"/>
-      </g>
-    </svg>
-    링곰 · Lingom — 곰이랑 매일 한 마디 <span class="heart">♥</span>
-  </footer>
+<script>
+(function(){
+  var WELCOME_KEY = 'lingom_welcomed';
+  var $ = function(s){ return document.querySelector(s); };
+  var views = ['login','welcome','picker'];
+  function show(id){ views.forEach(function(v){ $('#'+v).hidden = (v !== id); }); }
+
+  async function api(path, body){
+    var opt = { method: body ? 'POST' : 'GET', credentials: 'same-origin', headers: {} };
+    if (body){ opt.headers['Content-Type'] = 'application/json'; opt.body = JSON.stringify(body); }
+    var r = await fetch(path, opt);
+    var data = {};
+    try { data = await r.json(); } catch(e){}
+    return { ok: r.ok, status: r.status, data: data };
+  }
+
+  // 로그인 상태로 진입: 환영을 본 적 없으면 1회 보여주고, 아니면 바로 언어선택
+  function enterApp(email){
+    $('#who').textContent = email;
+    if (!localStorage.getItem(WELCOME_KEY)) show('welcome');
+    else show('picker');
+  }
+
+  // ---- 로그인/회원가입 폼 ----
+  var mode = 'login'; // 'login' | 'signup'
+  function setMode(m){
+    mode = m;
+    $('#tabLogin').classList.toggle('on', m === 'login');
+    $('#tabSignup').classList.toggle('on', m === 'signup');
+    $('#authSubmit').textContent = (m === 'login') ? '로그인' : '가입하고 시작하기';
+    $('#password').setAttribute('autocomplete', m === 'login' ? 'current-password' : 'new-password');
+    $('#authHint').textContent = (m === 'login')
+      ? '처음이신가요? 위에서 ‘회원가입’을 눌러 계정을 만드세요.'
+      : '비밀번호는 8자 이상으로 정해주세요.';
+    $('#authErr').hidden = true;
+  }
+  $('#tabLogin').addEventListener('click', function(){ setMode('login'); });
+  $('#tabSignup').addEventListener('click', function(){ setMode('signup'); });
+
+  $('#authForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    var email = $('#email').value.trim();
+    var password = $('#password').value;
+    var btn = $('#authSubmit');
+    $('#authErr').hidden = true;
+    btn.disabled = true;
+    var res = await api(mode === 'login' ? '/api/login' : '/api/signup', { email: email, password: password });
+    btn.disabled = false;
+    if (res.ok){
+      enterApp(res.data.email || email);
+    } else {
+      $('#authErr').textContent = res.data.error || '문제가 생겼어요. 잠시 후 다시 시도해주세요.';
+      $('#authErr').hidden = false;
+    }
+  });
+
+  // ---- 환영 → 시작 ----
+  $('#startBtn').addEventListener('click', function(){
+    localStorage.setItem(WELCOME_KEY, '1');
+    show('picker');
+  });
+
+  // ---- 로그아웃 ----
+  $('#logoutBtn').addEventListener('click', async function(){
+    await api('/api/logout', {});
+    show('login');
+  });
+
+  // ---- 부팅: 이미 로그인돼 있으면 앱으로 ----
+  (async function(){
+    var me = await api('/api/me');
+    if (me.ok) enterApp(me.data.email);
+    else show('login');
+  })();
+})();
+</script>
 </body>
 </html>
