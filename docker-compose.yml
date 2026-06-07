@@ -6,10 +6,15 @@ services:
     image: lingom
     container_name: lingom
     ports:
-      - "30000:30000"        # 왼쪽 30000 을 바꾸면 접속 포트가 바뀜 (예: "8080:30000")
+      - "30000:30000"          # 왼쪽 포트를 바꾸면 접속 포트가 바뀜 (예: "8080:30000")
+    environment:
+      # 세션 서명 키 — 운영에선 반드시 직접 지정. (예: 셸에서 export STUDY_SECRET=$(openssl rand -hex 32))
+      - STUDY_SECRET=${STUDY_SECRET:-dev-secret-change-me}
+      # 로컬 http 테스트는 0. HTTPS(리버스 프록시/Cloudflare) 뒤에 두면 1.
+      - STUDY_SECURE_COOKIE=${STUDY_SECURE_COOKIE:-0}
     volumes:
-      - lingom-progress:/data # 학습 진도 영구 저장 (컨테이너를 지워도 유지)
+      - lingom-data:/data       # 계정·진도 DB 영구 저장 (컨테이너를 지워도 유지)
     restart: unless-stopped
 
 volumes:
-  lingom-progress:
+  lingom-data:

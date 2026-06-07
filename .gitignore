@@ -5,6 +5,12 @@
 # gstack 내부 상태
 **/.gstack/
 
+# 런타임 데이터 (계정·진도 SQLite) — 절대 커밋 금지
+data/
+*.db
+*.db-wal
+*.db-shm
+
 # 임시 렌더링/미리보기 파일
 _t.html
 _preview.html

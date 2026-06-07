@@ -2,7 +2,7 @@
 
 곰이랑 매일 한 마디. 상황별 실생활 회화 패턴을 하루 하나씩, 입에 붙을 때까지.
 
-한국어 사용자를 위한 정적(static) 언어 학습 사이트입니다. 영어·스페인어·일본어의 실생활 회화 패턴을 상황별로 익힙니다.
+한국어 사용자를 위한 **호스팅형 언어 학습 서비스**입니다. 계정을 만들면 영어·스페인어·일본어의 실생활 회화 패턴을 상황별로 익히고, 어느 기기에서 접속하든 같은 진도로 이어서 학습할 수 있습니다.
 
 ## 언어
 
@@ -20,7 +20,7 @@
 - **간격 반복 복습 (SRS)** — 외운 문장을 적절한 간격으로 다시 복습
 - **쓰기 연습** — 따라 쓰기 패드 (일본어는 획순 애니메이션)
 - **섀도잉** — 문장 연속 재생으로 듣고 따라 읽기
-- **진도 동기화** — 여러 기기에서 같은 진도 공유 (`server.py`)
+- **계정 + 클라우드 동기화** — 가입하면 진도가 서버에 저장돼, 어느 기기에서든 이어서 학습
 - **문장별 단어·표현 풀이**
 
 ## 구성
@@ -28,7 +28,9 @@
 ```
 index.html          메인 랜딩 페이지
 bear.svg            마스코트(곰) / 파비콘
-server.py           정적 서빙 + 진도 동기화 API (포트 30000)
+server.py           서버 — 정적 서빙 + 계정/세션/진도 API (SQLite, 외부 의존성 0)
+Dockerfile          배포 이미지 (python:3.12-alpine)
+docker-compose.yml  운영용 실행 정의
 영어/ 스페인어/ 일본어/
   index.html        학습 엔진 (언어별 동일)
   patterns-data.js  상황·패턴·예문 데이터
@@ -39,56 +41,51 @@ server.py           정적 서빙 + 진도 동기화 API (포트 30000)
 
 데이터(`*-data.js`)는 엔진과 분리돼 있어, 데이터만 바꿔 콘텐츠를 확장할 수 있습니다.
 
-## 🚀 시작하기 (개발 지식 필요 없음)
+## 🛠 운영(서버 배포) 가이드
 
-아래 **방법 1(도커)** 만 따라 하면 됩니다. 명령어를 그대로 복사해서 붙여넣으세요.
+링곰은 **운영자가 서버를 한 대 띄우고, 사용자는 계정을 만들어 접속**하는 구조입니다.
+백엔드는 파이썬 표준 라이브러리만 쓰므로 의존성 설치가 없습니다 (`sqlite3`·`hashlib`·`hmac`).
 
-### 방법 1. 도커로 실행 — 가장 쉬움 ⭐
-
-> 컴퓨터에 **Docker Desktop** 한 번만 깔면, 파이썬 같은 걸 따로 설치할 필요가 없습니다.
-
-**1단계. Docker Desktop 설치**
-- 윈도우/맥: <https://www.docker.com/products/docker-desktop/> 에서 내려받아 설치하고 한 번 실행해 둡니다.
-
-**2단계. 이 프로젝트 내려받기**
-- GitHub 페이지 초록색 **`< > Code`** 버튼 → **Download ZIP** → 압축을 풉니다.
-  (또는 아는 분은 `git clone https://github.com/ninebell-dev/lingom.git`)
-
-**3단계. 폴더에서 터미널 열고 한 줄 실행**
-- 압축 푼 폴더 안에서 터미널(맥: 터미널, 윈도우: PowerShell)을 열고:
+### 1) 세션 비밀키 생성 (필수)
 
 ```bash
-docker compose up -d
+export STUDY_SECRET=$(openssl rand -hex 32)   # 운영에선 반드시 고정값으로 보관
 ```
 
-**4단계. 브라우저에서 접속**
-- 주소창에 **<http://localhost:30000>** 입력 → 끝! 🎉
-
-| 하고 싶은 것 | 명령어 |
-|---|---|
-| 끄기 | `docker compose down` |
-| 다시 켜기 | `docker compose up -d` |
-| 최신 코드로 새로 빌드 | `docker compose up -d --build` |
-
-학습 진도는 자동으로 저장돼서, 컨테이너를 껐다 켜거나 지워도 그대로 유지됩니다.
-접속 포트(30000)를 바꾸고 싶으면 `docker-compose.yml`의 `"30000:30000"`에서 앞 숫자만 바꾸세요 (예: `"8080:30000"` → http://localhost:8080).
-
-### 방법 2. 파이썬으로 실행 — 도커가 싫다면
-
-컴퓨터에 **Python 3** 이 있으면 설치할 게 전혀 없습니다. 폴더 안에서:
+### 2) 도커로 실행
 
 ```bash
-python3 server.py
+STUDY_SECRET=$STUDY_SECRET docker compose up -d
 ```
 
-→ 브라우저에서 <http://localhost:30000> 접속. (진도 동기화 포함)
+→ `http://서버:30000`. 실제 서비스는 **HTTPS 뒤**(Cloudflare·Caddy·Nginx 등)에 두고,
+그때는 `STUDY_SECURE_COOKIE=1`로 실행하세요. 데이터(계정·진도)는 `lingom-data` 볼륨의 SQLite에 저장됩니다.
 
-> 진도는 `~/.local/state/study-site/progress.json`에 저장되고, 여러 기기의 기록을 합집합으로 병합합니다.
-> 환경변수 `PORT`, `STUDY_DATA`, `STUDY_ROOT`로 포트·저장위치·서빙폴더를 바꿀 수 있습니다.
+| 항목 | 환경변수 | 비고 |
+|---|---|---|
+| 세션 서명 키 | `STUDY_SECRET` | **필수.** 미설정 시 재시작마다 전원 로그아웃 |
+| HTTPS 쿠키 | `STUDY_SECURE_COOKIE` | HTTPS 배포 시 `1` |
+| DB 경로 | `STUDY_DB` | 기본 `/data/lingom.db` (볼륨) |
+| 포트 | `PORT` | 기본 `30000` |
 
-### 방법 3. 그냥 둘러보기 — 진도 저장 없이
+### 3) 파이썬으로 직접 실행 (개발)
 
-`영어/index.html` 파일을 더블클릭해 브라우저로 바로 열어도 학습 화면은 동작합니다. (이 경우 기기 간 진도 동기화만 빠집니다.)
+```bash
+STUDY_SECRET=dev STUDY_SECURE_COOKIE=0 python3 server.py
+```
+
+> 백업은 `lingom-data` 볼륨의 `lingom.db`(+`-wal`/`-shm`)를 주기적으로 복사하면 됩니다.
+
+### API 요약
+
+```
+POST /api/signup  {email, password}   계정 생성 + 로그인
+POST /api/login   {email, password}   로그인
+POST /api/logout                      로그아웃
+GET  /api/me                          현재 로그인 사용자
+GET  /api/state                       내 진도 (로그인 필요)
+POST /api/state   {key: [...]|{...}}  내 진도 병합 저장 (로그인 필요)
+```
 
 ## ☕ 후원
 
