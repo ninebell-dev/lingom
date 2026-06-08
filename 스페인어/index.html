@@ -1644,10 +1644,10 @@
       return '<div class="qf-ans '+(matched[idx]?'ok':'no')+'">'+(matched[idx]?'✓ ':'✗ ')
         + '<span class="q-ans" data-q="speakfill" data-i="'+idx+'">'+_fillAns(it)+'<span class="spk">🔊</span></span></div>';
     }).join('');
-    quizBody.querySelector('#qfFoot').innerHTML = '<div class="qf-reveal">'+reveal+'</div>'
+    quizBody.querySelector('#qfFoot').outerHTML = '<div class="qf-reveal">'+reveal+'</div>'
       + '<div class="qf-result">'+tot+'문장 중 <b>'+score+'개</b> 기억해냈어요 '+em+'</div>'
-      + '<button class="q-btn q-check" data-q="retryFill">다시</button>'
-      + '<button class="q-btn q-ghost" data-q="done">닫기</button>';
+      + '<div class="q-foot"><button class="q-btn q-check" data-q="retryFill">다시</button>'
+      + '<button class="q-btn q-ghost" data-q="done">닫기</button></div>';
   }
   document.getElementById('quizClose').addEventListener('click', closeQuiz);
   quizModal.addEventListener('click', e=>{
