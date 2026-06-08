@@ -421,7 +421,15 @@
   }
   .quiz-btn:hover{background:var(--teal);border-color:var(--teal);box-shadow:0 4px 12px rgba(60,115,97,.28)}
   .group.mastered .quiz-btn{display:inline-flex}
-  .group.mastered .group-head{padding-right:44px}
+  .group.mastered .group-head{padding-right:90px}
+  .fill-btn{display:none;position:absolute;top:14px;right:52px;z-index:2;width:34px;height:34px;align-items:center;justify-content:center;line-height:1;font-size:15px;cursor:pointer;border-radius:50%;transition:.16s;background:rgba(191,78,50,.10);border:1px solid rgba(191,78,50,.28)}
+  .fill-btn:hover{background:var(--accent);border-color:var(--accent);box-shadow:0 4px 12px rgba(191,78,50,.28)}
+  .group.mastered .fill-btn{display:inline-flex}
+  .qf-list{display:flex;flex-direction:column;gap:14px;margin:6px 0}
+  .qf-ko{font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+  .qf-ans{font-size:13px;margin-top:6px}
+  .qf-ans.ok{color:var(--teal)} .qf-ans.no{color:var(--accent-deep)}
+  .qf-result{font-size:15px;font-weight:700;margin-bottom:10px;text-align:center}
 
   .modal.quiz{max-width:440px}
   .quiz-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
@@ -1014,6 +1022,7 @@
       const gMastered = g.examples.length>0 && g.examples.every((ex,ei)=>learned.has(`${s.id}|${gi}|${ei}`));
       html += `<div class="group${gMastered?' mastered':''}" data-group data-key="${gkey}">
         <button class="quiz-btn" data-quiz-start title="시험 보기" aria-label="시험 보기">📝</button>
+        <button class="fill-btn" data-fill-start title="전체 입력 시험" aria-label="전체 입력 시험">✍️</button>
         <div class="group-head">
           <span class="pattern-label">Pattern</span>
           <div class="pattern">${esc(g.pattern)}</div>
@@ -1087,6 +1096,8 @@
     // 📝 시험 보기 (다 외운 패턴)
     const qStart = e.target.closest('[data-quiz-start]');
     if(qStart){ startQuiz(qStart.closest('[data-group]')); return; }
+    const fStart = e.target.closest('[data-fill-start]');
+    if(fStart){ startFillQuiz(fStart.closest('[data-group]')); return; }
     const sStart = e.target.closest('[data-sit-quiz]');
     if(sStart){ startSituationQuiz(sStart.closest('section.situation')); return; }
     const sh = e.target.closest('[data-shadow]');
@@ -1571,6 +1582,52 @@
         </div>
       </div>`;
   }
+  const FILL_PH = QUIZ_LANG + '로 입력…';
+  function _fillOk(val, it){ return norm(val).length>0 && norm(val) === norm(it.en); }
+  function _fillAns(it){ return esc(it.en); }
+  function _fillSpeak(it){ return it.en; }
+  function startFillQuiz(group){
+    const items = groupExamples(group);
+    if(!items.length) return;
+    quiz.group = group; quiz.kind = 'fill'; quiz.items = items; quiz.graded = false; quiz.score = 0;
+    quizModal.hidden = false; renderFill();
+  }
+  function renderFill(){
+    const n = quiz.items.length;
+    quizProgress.textContent = n + '문장';
+    quizBarFill.style.width = '0%';
+    const rows = quiz.items.map(function(it,i){
+      return '<div class="qf-row" data-i="'+i+'">'
+        + '<div class="qf-ko">'+esc(it.ko)+'</div>'
+        + '<input class="q-input qf-input" data-i="'+i+'" type="text" placeholder="'+FILL_PH+'" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />'
+        + '<div class="qf-ans" hidden></div></div>';
+    }).join('');
+    quizBody.innerHTML = '<div class="q-label">이 패턴의 '+n+'문장을 모두 입력하세요</div>'
+      + '<div class="qf-list">'+rows+'</div>'
+      + '<div class="q-foot" id="qfFoot"><button class="q-btn q-check" data-q="gradeFill">채점</button></div>';
+    const first = quizBody.querySelector('.qf-input'); if(first) first.focus();
+  }
+  function gradeFill(){
+    if(quiz.graded) return;
+    let score = 0;
+    quiz.items.forEach(function(it,i){
+      const inp = quizBody.querySelector('.qf-input[data-i="'+i+'"]');
+      const ok = inp ? _fillOk(inp.value, it) : false;
+      if(ok) score++;
+      if(inp){ inp.classList.add(ok?'correct':'incorrect'); inp.readOnly = true; }
+      const ans = quizBody.querySelector('.qf-row[data-i="'+i+'"] .qf-ans');
+      ans.hidden = false; ans.className = 'qf-ans ' + (ok?'ok':'no');
+      ans.innerHTML = (ok ? '✓ 정답!' : '✗ 정답: ')
+        + '<span class="q-ans" data-q="speakfill" data-i="'+i+'">'+_fillAns(it)+'<span class="spk">🔊</span></span>';
+    });
+    quiz.graded = true; quiz.score = score;
+    quizBarFill.style.width = '100%';
+    const tot = quiz.items.length;
+    const em = score===tot ? '🎉' : score>=Math.ceil(tot*0.6) ? '👍' : '💪';
+    quizBody.querySelector('#qfFoot').innerHTML = '<div class="qf-result">'+tot+'문장 중 <b>'+score+'개</b> 정답 '+em+'</div>'
+      + '<button class="q-btn q-check" data-q="retryFill">다시</button>'
+      + '<button class="q-btn q-ghost" data-q="done">닫기</button>';
+  }
   document.getElementById('quizClose').addEventListener('click', closeQuiz);
   quizModal.addEventListener('click', e=>{
     if(e.target === quizModal){ closeQuiz(); return; }
@@ -1579,9 +1636,12 @@
     if(e.target.closest('[data-q="speak"]')){ speak(quiz.cur.en, e.target.closest('[data-q="speak"]')); return; }
     if(e.target.closest('[data-q="retry"]')){ (quiz.kind==='sit'?startSituationQuiz:startQuiz)(quiz.group); return; }
     if(e.target.closest('[data-q="done"]')){ closeQuiz(); return; }
+    if(e.target.closest('[data-q="gradeFill"]')){ gradeFill(); return; }
+    if(e.target.closest('[data-q="retryFill"]')){ startFillQuiz(quiz.group); return; }
+    var _sf=e.target.closest('[data-q="speakfill"]'); if(_sf){ speak(_fillSpeak(quiz.items[+_sf.dataset.i]), _sf); return; }
   });
   quizModal.addEventListener('keydown', e=>{
-    if(e.key === 'Enter'){ e.preventDefault(); quiz.checked ? nextQ() : check(); }
+    if(e.key === 'Enter'){ if(quiz.kind==='fill') return; e.preventDefault(); quiz.checked ? nextQ() : check(); }
   });
 
   // ===== 2단계: 간격 반복 복습 + 오늘의 학습 =====
