@@ -1,0 +1,11 @@
+{
+  // 링곰 공개 사이트 — Cloudflare Workers (정적 자산 서빙)
+  // site/ 폴더를 그대로 lingom.app 에 배포합니다. 빌드 단계 없음.
+  "name": "lingom",
+  "compatibility_date": "2024-11-01",
+  "assets": {
+    "directory": "./site",
+    // 없는 경로는 site/404.html 로 응답
+    "not_found_handling": "404-page"
+  }
+}

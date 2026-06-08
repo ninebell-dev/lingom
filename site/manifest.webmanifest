@@ -1,0 +1,15 @@
+{
+  "name": "링곰 · Lingom",
+  "short_name": "링곰",
+  "description": "상황별 실생활 회화 패턴으로 영어·스페인어·일본어를 익히는 한국어 회화 학습 서비스",
+  "lang": "ko",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F4ECDD",
+  "theme_color": "#F4ECDD",
+  "icons": [
+    { "src": "/bear.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" },
+    { "src": "/assets/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" }
+  ]
+}

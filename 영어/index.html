@@ -650,13 +650,13 @@
   .wp-stage::after{content:"";position:absolute;top:50%;left:7%;right:7%;border-top:1px dashed rgba(58,51,48,.18)}
   .wp-guide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
     font-family:"Newsreader",Georgia,"Times New Roman",serif;font-weight:600;line-height:1;
-    color:rgba(58,51,48,.14);pointer-events:none;text-align:center;padding:10px;word-break:break-word}
+    color:rgba(58,51,48,.32);pointer-events:none;text-align:center;padding:10px;word-break:break-word}
   .writepad.guide-off .wp-guide{display:none}
   #wpCanvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
   .wp-hint{font-size:11.5px;color:var(--ink-faint);line-height:1.45}
   /* 넓은 화면: [본문+패드]를 한 그룹으로 가운데 정렬. 마스트헤드는 좌우 패딩으로
      텍스트만 본문 위로 맞추고 전체폭 배경/테두리는 유지 */
-  @media(min-width:1500px){
+  @media(min-width:1100px){
     :root{ --wpw:322px; --wpg:24px; --cwmax:1180px;
       --grp:calc(var(--cwmax) + var(--wpg) + var(--wpw));
       --cleft:max(16px, calc((100vw - var(--grp))/2));
@@ -699,6 +699,7 @@
     <button class="tool-btn" id="hideKoBtn" title="해석을 가리고 영어로 뜻 맞혀보기">🇰🇷 해석 가리기</button>
     <button class="tool-btn" id="favBtn"><span class="star">★</span> 즐겨찾기</button>
     <button class="tool-btn" id="helpBtn" title="키보드 단축키 (?)">⌨ 단축키</button>
+    <button class="tool-btn" id="speedBtn" title="음성 재생 속도 (눌러서 변경)">🐢 속도 0.8×</button>
     <button class="tool-btn" id="resetBtn" title="암기 기록 초기화">↻ 초기화</button>
   </div>
   <div class="progress-wrap">
@@ -1070,6 +1071,23 @@
   pickVoice();
   if(window.speechSynthesis) speechSynthesis.onvoiceschanged = pickVoice;
 
+  // ---------- 음성 재생 속도 ----------
+  const TTS_SPEEDS = [0.6, 0.8, 1.0, 1.25];
+  let ttsRate = parseFloat(localStorage.getItem('lingom_tts_rate'));
+  if(!TTS_SPEEDS.includes(ttsRate)) ttsRate = 0.8;
+  const speedBtn = document.getElementById('speedBtn');
+  function updateSpeedBtn(){
+    if(!speedBtn) return;
+    const icon = ttsRate < 1 ? '🐢' : ttsRate > 1 ? '🐇' : '🔊';
+    speedBtn.textContent = icon + ' 속도 ' + ttsRate + '×';
+  }
+  updateSpeedBtn();
+  if(speedBtn) speedBtn.addEventListener('click', ()=>{
+    ttsRate = TTS_SPEEDS[(TTS_SPEEDS.indexOf(ttsRate) + 1) % TTS_SPEEDS.length];
+    localStorage.setItem('lingom_tts_rate', ttsRate);
+    updateSpeedBtn();
+  });
+
   let speakingEl = null;
   function speak(text, el, _spkcb){
     if(!('speechSynthesis' in window)){ return; }
@@ -1077,7 +1095,7 @@
     if(speakingEl) speakingEl.classList.remove('speaking');
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'en-US';
-    u.rate = 0.9;
+    u.rate = ttsRate;
     const v = voices.find(v=>/en[-_]US/i.test(v.lang) && /Google|Samantha|Natural|Microsoft/i.test(v.name))
             || voices.find(v=>/^en/i.test(v.lang));
     if(v) u.voice = v;
