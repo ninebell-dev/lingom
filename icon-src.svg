@@ -1,0 +1,24 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="링곰">
+  <!-- full-bleed opaque background (maskable-safe: 코너까지 채움) -->
+  <rect width="512" height="512" fill="#FBF6EC"/>
+  <circle cx="256" cy="248" r="196" fill="#F4E6CF"/>
+  <!-- 곰 얼굴 (bear.svg의 얼굴 그룹을 중앙에 안전 영역 안으로 배치) -->
+  <g transform="translate(256 256) scale(3.95) translate(-50 -51.5)">
+    <g stroke="#7A4F2E" stroke-width="2.4">
+      <circle cx="28" cy="29" r="13" fill="#C58A5A"/>
+      <circle cx="72" cy="29" r="13" fill="#C58A5A"/>
+      <circle cx="50" cy="55" r="32" fill="#C58A5A"/>
+    </g>
+    <circle cx="28" cy="30" r="6.5" fill="#D98B6A"/>
+    <circle cx="72" cy="30" r="6.5" fill="#D98B6A"/>
+    <circle cx="32" cy="62" r="6" fill="#BF4E32" opacity=".2"/>
+    <circle cx="68" cy="62" r="6" fill="#BF4E32" opacity=".2"/>
+    <ellipse cx="50" cy="63" rx="15.5" ry="12" fill="#F6E8D2" stroke="#7A4F2E" stroke-width="2.4"/>
+    <circle cx="39" cy="51" r="3.7" fill="#2B2521"/>
+    <circle cx="61" cy="51" r="3.7" fill="#2B2521"/>
+    <circle cx="40.2" cy="49.8" r="1.1" fill="#fff"/>
+    <circle cx="62.2" cy="49.8" r="1.1" fill="#fff"/>
+    <ellipse cx="50" cy="58.5" rx="5" ry="3.6" fill="#3A2E26"/>
+    <path d="M50 62.1 v3 M50 65.1 q-4.2 3.4 -7.6 .9 M50 65.1 q4.2 3.4 7.6 .9" fill="none" stroke="#3A2E26" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>
