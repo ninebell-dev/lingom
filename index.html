@@ -2,9 +2,16 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#C0533A" />
 <title>링곰 · Lingom — 곰이랑 매일 한 마디</title>
 <link rel="icon" type="image/svg+xml" href="bear.svg" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="링곰" />
+<link rel="manifest" href="manifest.webmanifest" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet" />
@@ -17,6 +24,7 @@
     --kr:'Pretendard',system-ui,sans-serif; --en:'Newsreader',Georgia,serif; --display:'Fraunces',Georgia,serif;
   }
   *{box-sizing:border-box}
+  [hidden]{display:none!important} /* display:flex 등 author 규칙이 hidden 속성을 덮어쓰는 것 방지 */
   html,body{margin:0}
   body{
     font-family:var(--kr); color:var(--ink); background:var(--paper);
@@ -48,6 +56,17 @@
   .submit:hover{background:var(--accent-deep)}
   .submit:disabled{opacity:.6;cursor:default}
   .hint{font-size:12px;color:var(--ink-faint);margin-top:12px;text-align:center}
+  .social-sep{display:flex;align-items:center;gap:12px;margin:20px 0 14px;color:var(--ink-faint);font-size:12px}
+  .social-sep::before,.social-sep::after{content:"";flex:1;height:1px;background:var(--line)}
+  .social{display:flex;flex-direction:column;gap:9px}
+  .soc{display:flex;align-items:center;justify-content:center;gap:9px;font-family:var(--kr);font-weight:600;font-size:14.5px;border-radius:12px;padding:12px;cursor:pointer;text-decoration:none;border:1.5px solid transparent;transition:.15s}
+  .soc:hover{filter:brightness(.96);transform:translateY(-1px)}
+  .soc-ic{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;font-weight:800;font-size:13px;flex:none}
+  .soc-google{background:#fff;color:#3c4043;border-color:#dadce0}
+  .soc-google .soc-ic{color:#4285F4}
+  .soc-kakao{background:#FEE500;color:#191600}
+  .soc-naver{background:#03C75A;color:#fff}
+  .soc-naver .soc-ic{border:1px solid rgba(255,255,255,.55)}
   .err{font-size:13px;color:var(--accent-deep);background:rgba(191,78,50,.08);border:1px solid rgba(191,78,50,.25);border-radius:10px;padding:9px 12px;margin-bottom:14px}
   .err[hidden]{display:none}
 
@@ -102,6 +121,30 @@
 
   footer{margin-top:auto;text-align:center;padding:40px 0 28px;color:var(--ink-faint);font-size:12.5px}
   footer .heart{color:var(--accent)}
+
+  /* ---------- 닉네임 변경 모달 ---------- */
+  #who{transition:.15s}
+  #who:hover{color:var(--accent)}
+  .modal-veil{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;
+    background:rgba(43,37,33,.42);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);animation:veilIn .18s ease}
+  .modal{width:100%;max-width:360px;background:var(--card);border:1.5px solid var(--line);border-radius:22px;
+    padding:28px 26px 24px;box-shadow:0 22px 60px rgba(74,54,33,.28);text-align:center;animation:modalIn .22s cubic-bezier(.2,.9,.3,1.2)}
+  .modal-bear{font-size:38px;line-height:1}
+  .modal h3{font-family:var(--display);font-weight:600;font-size:23px;color:var(--ink);margin:8px 0 4px;letter-spacing:-.01em}
+  .modal-sub{font-family:var(--en);font-style:italic;color:var(--ink-soft);font-size:14.5px;margin-bottom:20px}
+  #nickInput{width:100%;font-family:var(--kr);font-size:16px;text-align:center;color:var(--ink);background:var(--paper2);
+    border:1.5px solid var(--line);border-radius:13px;padding:13px 14px;outline:none;transition:.15s}
+  #nickInput:focus{border-color:var(--accent);background:#fff}
+  .modal-err{font-size:12.5px;color:var(--accent-deep);margin-top:10px}
+  .modal-actions{display:flex;gap:10px;margin-top:18px}
+  .m-btn{flex:1;font-family:var(--kr);font-weight:700;font-size:15px;border-radius:12px;padding:12px;cursor:pointer;transition:.15s;border:1.5px solid transparent}
+  .m-ghost{background:var(--paper);color:var(--ink-soft);border-color:var(--line)}
+  .m-ghost:hover{background:#fff;color:var(--ink)}
+  .m-go{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(191,78,50,.25)}
+  .m-go:hover{background:var(--accent-deep)}
+  .m-go:disabled{opacity:.55;cursor:default}
+  @keyframes veilIn{from{opacity:0}to{opacity:1}}
+  @keyframes modalIn{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -121,6 +164,10 @@
       </div>
       <form id="authForm" autocomplete="on">
         <div class="err" id="authErr" hidden></div>
+        <div class="field" id="nickField" hidden>
+          <label for="nickname">닉네임 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">(선택 · 나중에 바꿀 수 있어요)</span></label>
+          <input id="nickname" name="nickname" type="text" autocomplete="nickname" placeholder="곰돌이" maxlength="30" />
+        </div>
         <div class="field">
           <label for="email">이메일</label>
           <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required />
@@ -132,6 +179,8 @@
         <button class="submit" id="authSubmit" type="submit">로그인</button>
         <div class="hint" id="authHint">처음이신가요? 위에서 ‘회원가입’을 눌러 계정을 만드세요.</div>
       </form>
+      <div class="social-sep" id="socialSep" hidden><span>또는</span></div>
+      <div class="social" id="socialBtns" hidden></div>
     </div>
   </section>
 
@@ -195,6 +244,23 @@
     </div>
   </section>
 
+  <!-- ===== 닉네임 변경 모달 ===== -->
+  <div class="modal-veil" id="nickModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="nickModalTitle">
+      <div class="modal-bear">🐻</div>
+      <h3 id="nickModalTitle">닉네임 바꾸기</h3>
+      <p class="modal-sub">곰이 어떻게 불러드릴까요?</p>
+      <form id="nickForm">
+        <input id="nickInput" type="text" maxlength="30" placeholder="곰돌이" autocomplete="off" />
+        <div class="modal-err" id="nickErr" hidden></div>
+        <div class="modal-actions">
+          <button type="button" class="m-btn m-ghost" id="nickCancel">취소</button>
+          <button type="submit" class="m-btn m-go" id="nickSave">저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <footer>🐻 링곰 · Lingom — 곰이랑 매일 한 마디 <span class="heart">♥</span></footer>
 
 <script>
@@ -214,11 +280,38 @@
   }
 
   // 로그인 상태로 진입: 환영을 본 적 없으면 1회 보여주고, 아니면 바로 언어선택
-  function enterApp(email){
-    $('#who').textContent = email;
+  function enterApp(name){
+    $('#who').textContent = name;
+    $('#who').title = '닉네임 바꾸기';
     if (!localStorage.getItem(WELCOME_KEY)) show('welcome');
     else show('picker');
   }
+
+  // ---- 닉네임 클릭해서 바꾸기 (모달) ----
+  $('#who').style.cursor = 'pointer';
+  function openNickModal(){
+    $('#nickInput').value = $('#who').textContent || '';
+    $('#nickErr').hidden = true;
+    $('#nickModal').hidden = false;
+    setTimeout(function(){ $('#nickInput').focus(); $('#nickInput').select(); }, 30);
+  }
+  function closeNickModal(){ $('#nickModal').hidden = true; }
+  $('#who').addEventListener('click', openNickModal);
+  $('#nickCancel').addEventListener('click', closeNickModal);
+  $('#nickModal').addEventListener('click', function(e){ if (e.target === this) closeNickModal(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !$('#nickModal').hidden) closeNickModal(); });
+  $('#nickForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    var cur = $('#who').textContent || '';
+    var next = $('#nickInput').value.trim();
+    if (!next){ $('#nickErr').textContent = '닉네임을 입력해 주세요'; $('#nickErr').hidden = false; return; }
+    if (next === cur){ closeNickModal(); return; }
+    var btn = $('#nickSave'); btn.disabled = true; $('#nickErr').hidden = true;
+    var res = await api('/api/profile', { name: next });
+    btn.disabled = false;
+    if (res.ok){ $('#who').textContent = res.data.display || next; closeNickModal(); }
+    else { $('#nickErr').textContent = res.data.error || '닉네임을 바꾸지 못했어요'; $('#nickErr').hidden = false; }
+  });
 
   // ---- 로그인/회원가입 폼 ----
   var mode = 'login'; // 'login' | 'signup'
@@ -227,6 +320,7 @@
     $('#tabLogin').classList.toggle('on', m === 'login');
     $('#tabSignup').classList.toggle('on', m === 'signup');
     $('#authSubmit').textContent = (m === 'login') ? '로그인' : '가입하고 시작하기';
+    $('#nickField').hidden = (m === 'login'); // 닉네임은 회원가입에서만
     $('#password').setAttribute('autocomplete', m === 'login' ? 'current-password' : 'new-password');
     $('#authHint').textContent = (m === 'login')
       ? '처음이신가요? 위에서 ‘회원가입’을 눌러 계정을 만드세요.'
@@ -243,10 +337,12 @@
     var btn = $('#authSubmit');
     $('#authErr').hidden = true;
     btn.disabled = true;
-    var res = await api(mode === 'login' ? '/api/login' : '/api/signup', { email: email, password: password });
+    var payload = { email: email, password: password };
+    if (mode === 'signup'){ var nk = $('#nickname').value.trim(); if (nk) payload.name = nk; }
+    var res = await api(mode === 'login' ? '/api/login' : '/api/signup', payload);
     btn.disabled = false;
     if (res.ok){
-      enterApp(res.data.email || email);
+      enterApp(res.data.display || res.data.email || email);
     } else {
       $('#authErr').textContent = res.data.error || '문제가 생겼어요. 잠시 후 다시 시도해주세요.';
       $('#authErr').hidden = false;
@@ -265,12 +361,38 @@
     show('login');
   });
 
+  // ---- 소셜 로그인 버튼 (설정된 제공자만 노출) ----
+  (async function(){
+    var META = {
+      google: { label: 'Google로 계속하기', cls: 'soc-google', ic: 'G' },
+      kakao:  { label: '카카오로 계속하기', cls: 'soc-kakao',  ic: '💬' },
+      naver:  { label: '네이버로 계속하기', cls: 'soc-naver',  ic: 'N' }
+    };
+    var res = await api('/api/providers');
+    if (!res.ok) return;
+    var html = '';
+    ['google','kakao','naver'].forEach(function(p){
+      if (res.data[p] && META[p]){
+        html += '<a class="soc ' + META[p].cls + '" href="/auth/' + p + '">'
+              + '<span class="soc-ic">' + META[p].ic + '</span>' + META[p].label + '</a>';
+      }
+    });
+    if (html){ $('#socialBtns').innerHTML = html; $('#socialBtns').hidden = false; $('#socialSep').hidden = false; }
+  })();
+
   // ---- 부팅: 이미 로그인돼 있으면 앱으로 ----
   (async function(){
     var me = await api('/api/me');
-    if (me.ok) enterApp(me.data.email);
+    if (me.ok) enterApp(me.data.display || me.data.email);
     else show('login');
   })();
+
+  // ---- PWA 서비스워커 등록 (홈 화면 설치 + 아이콘) ----
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('/sw.js').catch(function(e){console.error('SW register 실패',e);});
+    });
+  }
 })();
 </script>
 </body>
